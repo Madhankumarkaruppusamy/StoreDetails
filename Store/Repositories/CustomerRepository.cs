@@ -16,7 +16,7 @@ namespace Store.Repositories
         {
             try
             {
-                var result=_contxt.Customers.Include(x=>x.CustomerId).ToList();
+                var result = _contxt.Customers.ToList();
                 return result;
             }
             catch (Exception)
@@ -27,21 +27,60 @@ namespace Store.Repositories
 
         public Customer ReadCustomerById(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = _contxt.Customers.Where(x => x.CustomerId == id);
+                return result.ToList().FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void InsertCustomer(Customer detail)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _contxt.Customers.Add(detail);
+                _contxt.SaveChanges();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public void UpdateCustomer(int id, Customer detail)
         {
-            throw new NotImplementedException();
+            try
+            {
+
+                _contxt.Customers.Update(detail);
+                _contxt.SaveChanges();
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
         public void DeleteCustomer(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var book = _contxt.Customers.Find(id);
+                if (book != null)
+                {
+                    _contxt.Customers.Remove(book);
+                    _contxt.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
