@@ -4,6 +4,7 @@ namespace Store.Models
 {
     public class Address
     {
+        [Key]
         public int AddressId {get;set;}
 
         [Required]
@@ -12,7 +13,7 @@ namespace Store.Models
 
         [Required]
         [MaxLength(20)]
-        public string PostalCode { get; set; }
+        public long PostalCode { get; set; }
 
         public int CustomerId { get; set; }
         public virtual Customer Customer { get; set; }

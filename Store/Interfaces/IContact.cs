@@ -4,6 +4,7 @@ namespace Store.Interfaces
 {
     public interface IContact
     {
+        public Contact ReadContactById();
         public void InsertContact(Contact detail);
         public List<Contact> ReadContact();
         public void UpdateContact(int id, Contact detail);

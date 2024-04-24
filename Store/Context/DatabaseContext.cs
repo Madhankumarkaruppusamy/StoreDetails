@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Store.Models;
 using System.Collections.Generic;
 
-namespace Store.Models
+namespace Store.Context
 {
-    public class DatabaseContext:DbContext
+    public class DatabaseContext : DbContext
     {
-         
+
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
         }

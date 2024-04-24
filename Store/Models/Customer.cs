@@ -4,6 +4,7 @@ namespace Store.Models
 {
     public class Customer
     {
+        [Key]
         public int CustomerId { get; set; }
 
         [Required]

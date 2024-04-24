@@ -4,6 +4,7 @@ namespace Store.Interfaces
 {
     public interface IAddress
     {
+        public Address ReadAddressById();
         public void InsertAddress(Address detail);
         public List<Address> ReadAddress();
         public void UpdateAddress(int id, Address detail);
