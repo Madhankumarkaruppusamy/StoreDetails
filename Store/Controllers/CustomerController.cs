@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Store.Context;
 using Store.Interfaces;
 using Store.Models;
 using Store.Repositories;
@@ -11,47 +12,77 @@ namespace Store.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        private readonly ICustomer _obj;
-        public CustomerController(ICustomer obj)
+        private readonly DatabaseContext _contxt;
+        public CustomerController(DatabaseContext contxt)
         {
-            _obj = obj;
+            _contxt = contxt;
         }
 
 
         // GET: api/<CustomerController>
         [HttpGet]
-        public List<Customer> Get()
+        [Route("Customerlist")]
+        public List<Customer> GetCustomer()
         {
-            return _obj.ReadCustomer();
+            try
+            {
+                var result = _contxt.Customers.ToList();
+                return result;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        // GET api/<CustomerController>/5
-        [HttpGet("{id}")]
-        public Customer Get(int id)
+        // GET: api/<AddressController>
+        [HttpGet]
+        [Route("Addresslist")]
+        public List<Address> GetAddress()
         {
-            return _obj.ReadCustomerById(id);
+            try
+            {
+                var result = _contxt.Addresses.ToList();
+                    return result;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        // POST api/<CustomerController>
-        [HttpPost]
-        public void Post([FromBody] Customer detail)
+        // GET: api/<ContactController>
+        [HttpGet]
+        [Route("Contactlist")]
+        public List<Contact> GetContact()
         {
-            _obj.InsertCustomer(detail);
+            try
+            {
+                var result = _contxt.Contacts.ToList();
+                return result;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        // PUT api/<CustomerController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Customer detail)
-
+        // GET: api/<OrderController>
+        [HttpGet]
+        [Route("Orderlist")]
+        public List<Order> GetOrder()
         {
-            _obj.UpdateCustomer(id,detail);
+            try
+            {
+                var result = _contxt.Orders.ToList();
+                return result;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        // DELETE api/<CustomerController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-            _obj.DeleteCustomer(id);
-        }
+
     }
 }
