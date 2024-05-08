@@ -3,21 +3,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Store.Models
 {
-    public class Address
+    public class Item
     {
         [Key]
-        public int AddressId {get;set;}
-
+        public int ItemId { get; set; }
         [Required]
-        [MaxLength(200)]
-        public string City { get; set; }
-
-        [Required]
-        [MaxLength(20)]
-        public long PostalCode { get; set; }
+        [MaxLength(50)]
+        public string Product { get; set; }
         [ForeignKey("Customer")]
         public int CustomerId { get; set; }
         public virtual Customer Customer { get; set; }
     }
-
 }

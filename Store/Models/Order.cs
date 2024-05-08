@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
 
 namespace Store.Models
@@ -11,6 +12,7 @@ namespace Store.Models
         [MaxLength(100)]
         public string OrderItem {  get; set; }
         public DateTime OrderDate { get; set; }
+        [ForeignKey("Customer")]
         public int CustomerId { get; set; }
         public virtual Customer Customer { get; set; }
     }

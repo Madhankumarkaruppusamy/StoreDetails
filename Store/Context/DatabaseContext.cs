@@ -15,6 +15,8 @@ namespace Store.Context
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Contact> Contacts { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<Item> Items { get; set; }
+        public DbSet<Counter> Counters { get; set; }
     }
 
 }
