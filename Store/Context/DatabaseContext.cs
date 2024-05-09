@@ -9,6 +9,7 @@ namespace Store.Context
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         {
+
         }
 
         public DbSet<Customer> Customers { get; set; }

@@ -7,6 +7,7 @@ namespace Store.Models
     public class Counter
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int CounterId { get; set; }
         [Required]
         [MaxLength(100)]
@@ -17,7 +18,7 @@ namespace Store.Models
         public DateTime OrderedDate { get; set; }
         [ForeignKey("Customer")]
         public int CustomerId { get; set; }
-        public virtual Customer Customer { get; set; }
+        public Customer Customer { get; set; }
 
     }
 }

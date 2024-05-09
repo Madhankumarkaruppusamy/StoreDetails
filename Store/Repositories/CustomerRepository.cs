@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Store.Context;
+using Store.Data;
 using Store.Interfaces;
 using Store.Models;
 
@@ -38,11 +39,29 @@ namespace Store.Repositories
             }
         }
 
-        public void InsertCustomer(Customer detail)
+        public void InsertCustomer(CustomerInput input)
         {
             try
             {
-                _contxt.Customers.Add(detail);
+                var customer = new Customer
+                {
+                    CustomerName = input.CustomerName,
+                };
+
+                var address = new Address
+                {
+                    City = input.City,
+                    PostalCode = input.PostalCode
+                };
+
+                var contact = new Contact
+                {
+                    Phone = input.ContactNumber
+                };
+                customer.Addresses.Add(address);
+                customer.Contacts.Add(contact);
+
+                _contxt.Customers.Add(customer);
                 _contxt.SaveChanges();
 
             }
@@ -82,5 +101,6 @@ namespace Store.Repositories
                 throw;
             }
         }
+
     }
 }

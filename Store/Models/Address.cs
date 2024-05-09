@@ -6,6 +6,7 @@ namespace Store.Models
     public class Address
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int AddressId {get;set;}
 
         [Required]
@@ -15,9 +16,9 @@ namespace Store.Models
         [Required]
         [MaxLength(20)]
         public long PostalCode { get; set; }
-        [ForeignKey("Customer")]
+        [ForeignKey("CustomerID")]
         public int CustomerId { get; set; }
-        public virtual Customer Customer { get; set; }
+        public Customer Customer { get; set; }
     }
 
 }

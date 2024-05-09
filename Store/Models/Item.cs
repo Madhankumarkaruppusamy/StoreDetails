@@ -6,12 +6,13 @@ namespace Store.Models
     public class Item
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ItemId { get; set; }
         [Required]
         [MaxLength(50)]
         public string Product { get; set; }
-        [ForeignKey("Customer")]
+        [ForeignKey("CustomerID")]
         public int CustomerId { get; set; }
-        public virtual Customer Customer { get; set; }
+        public Customer Customer { get; set; }
     }
 }

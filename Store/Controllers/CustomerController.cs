@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Store.Context;
+using Store.Data;
 using Store.Interfaces;
 using Store.Models;
 using Store.Repositories;
@@ -35,9 +36,9 @@ namespace Store.Controllers
 
         // POST api/<CustomerController>
         [HttpPost]
-        public void Post([FromBody] Customer detail)
+        public void Post(CustomerInput input)
         {
-            _obj.InsertCustomer(detail);
+            _obj.InsertCustomer(input);
         }
 
         // PUT api/<CustomerController>/5

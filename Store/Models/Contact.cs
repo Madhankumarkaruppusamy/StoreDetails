@@ -6,6 +6,7 @@ namespace Store.Models
     public class Contact
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ContactId { get; set; }
 
         [Required]
@@ -19,6 +20,6 @@ namespace Store.Models
         public long Phone { get; set; }
         [ForeignKey("Customer")]
         public int CustomerId { get; set; }
-        public virtual Customer Customer { get; set; }
+        public Customer Customer { get; set; }
     }
 }
