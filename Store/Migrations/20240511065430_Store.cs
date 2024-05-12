@@ -48,8 +48,7 @@ namespace Store.Migrations
                         name: "FK_Addresses_Customers_CustomerId",
                         column: x => x.CustomerId,
                         principalTable: "Customers",
-                        principalColumn: "CustomerId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "CustomerId");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 

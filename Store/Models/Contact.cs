@@ -18,7 +18,7 @@ namespace Store.Models
         [MaxLength(20)]
         [Phone]
         public long Phone { get; set; }
-        [ForeignKey("Customer")]
+        [ForeignKey("CustomerId")]
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
     }

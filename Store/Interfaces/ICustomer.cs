@@ -8,7 +8,7 @@ namespace Store.Interfaces
 
         public Customer ReadCustomerById(int id);
         public List<Customer> ReadCustomer();
-        public void InsertCustomer(CustomerInput input);
+        public dynamic InsertCustomer(CustomerInput input);
         public void UpdateCustomer(int id, Customer detail);
         public void DeleteCustomer(int id);
         

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Store.Context;
 
@@ -10,9 +11,11 @@ using Store.Context;
 namespace Store.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240511084932_UpdateAddressTable")]
+    partial class UpdateAddressTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,7 +44,7 @@ namespace Store.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Addresses", (string)null);
+                    b.ToTable("Addresses");
                 });
 
             modelBuilder.Entity("Store.Models.Contact", b =>
@@ -66,7 +69,7 @@ namespace Store.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Contacts", (string)null);
+                    b.ToTable("Contacts");
                 });
 
             modelBuilder.Entity("Store.Models.Counter", b =>
@@ -94,7 +97,7 @@ namespace Store.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Counters", (string)null);
+                    b.ToTable("Counters");
                 });
 
             modelBuilder.Entity("Store.Models.Customer", b =>
@@ -110,7 +113,7 @@ namespace Store.Migrations
 
                     b.HasKey("CustomerId");
 
-                    b.ToTable("Customers", (string)null);
+                    b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("Store.Models.Item", b =>
@@ -131,7 +134,7 @@ namespace Store.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Items", (string)null);
+                    b.ToTable("Items");
                 });
 
             modelBuilder.Entity("Store.Models.Order", b =>
@@ -155,7 +158,7 @@ namespace Store.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("Orders", (string)null);
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("Store.Models.Address", b =>

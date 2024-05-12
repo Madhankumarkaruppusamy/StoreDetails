@@ -11,7 +11,7 @@ using Store.Context;
 namespace Store.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240508091800_Store")]
+    [Migration("20240511065430_Store")]
     partial class Store
     {
         /// <inheritdoc />
@@ -33,7 +33,7 @@ namespace Store.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
 
-                    b.Property<int>("CustomerId")
+                    b.Property<int?>("CustomerId")
                         .HasColumnType("int");
 
                     b.Property<long>("PostalCode")
@@ -165,9 +165,7 @@ namespace Store.Migrations
                 {
                     b.HasOne("Store.Models.Customer", "Customer")
                         .WithMany("Addresses")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CustomerId");
 
                     b.Navigation("Customer");
                 });

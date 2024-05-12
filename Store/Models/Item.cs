@@ -11,7 +11,7 @@ namespace Store.Models
         [Required]
         [MaxLength(50)]
         public string Product { get; set; }
-        [ForeignKey("CustomerID")]
+        [ForeignKey("CustomerId")]
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
     }

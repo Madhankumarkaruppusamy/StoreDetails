@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Store.Models
@@ -16,7 +17,7 @@ namespace Store.Models
         [Required]
         [MaxLength(20)]
         public long PostalCode { get; set; }
-        [ForeignKey("CustomerID")]
+        [ForeignKey("CustomerId")]
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
     }

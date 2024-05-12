@@ -36,9 +36,10 @@ namespace Store.Controllers
 
         // POST api/<CustomerController>
         [HttpPost]
-        public void Post(CustomerInput input)
+        public dynamic Post(CustomerInput input)
         {
-            _obj.InsertCustomer(input);
+           var addData = _obj.InsertCustomer(input);
+            return 200;
         }
 
         // PUT api/<CustomerController>/5

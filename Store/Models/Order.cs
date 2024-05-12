@@ -13,7 +13,7 @@ namespace Store.Models
         [MaxLength(100)]
         public string OrderItem {  get; set; }
         public DateTime OrderDate { get; set; }
-        [ForeignKey("Customer")]
+        [ForeignKey("CustomerId")]
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
     }

@@ -16,7 +16,7 @@ namespace Store.Models
         public string ItemOrdered { get; set; }
         [Required]
         public DateTime OrderedDate { get; set; }
-        [ForeignKey("Customer")]
+        [ForeignKey("CustomerId")]
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
 

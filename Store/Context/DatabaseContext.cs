@@ -12,12 +12,12 @@ namespace Store.Context
 
         }
 
-        public DbSet<Customer> Customers { get; set; }
-        public DbSet<Address> Addresses { get; set; }
-        public DbSet<Contact> Contacts { get; set; }
-        public DbSet<Order> Orders { get; set; }
-        public DbSet<Item> Items { get; set; }
-        public DbSet<Counter> Counters { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
+        public virtual DbSet<Address> Addresses { get; set; }
+        public virtual DbSet<Contact> Contacts { get; set; }
+        public virtual  DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Item> Items { get; set; }
+        public virtual DbSet<Counter> Counters { get; set; }
     }
 
 }

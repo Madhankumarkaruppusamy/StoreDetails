@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Store.Context;
 using Store.Data;
 using Store.Interfaces;
@@ -39,7 +41,7 @@ namespace Store.Repositories
             }
         }
 
-        public void InsertCustomer(CustomerInput input)
+        public dynamic InsertCustomer(CustomerInput input)
         {
             try
             {
@@ -56,18 +58,21 @@ namespace Store.Repositories
 
                 var contact = new Contact
                 {
-                    Phone = input.ContactNumber
+                    Phone = input.ContactNumber,
+                    Email=input.Email
                 };
+
                 customer.Addresses.Add(address);
-                customer.Contacts.Add(contact);
+                //customer.Contacts.Add(contact);
 
                 _contxt.Customers.Add(customer);
                 _contxt.SaveChanges();
+                return 200;
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 
