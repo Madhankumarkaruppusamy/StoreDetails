@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 using Store1.DBContext;
 using Store1.Entity;
 using Store1.IRepository;
@@ -50,52 +51,30 @@ namespace Store1.Repository
             }
         }
 
-
-        public dynamic UpdateCustomer(long customerId, CustomerInput input)
+        public IEnumerable<FetchCustomerDetail> GetAll()
         {
-            try
-            {
-
-                var customerToUpdate = _db.Customer. Include(c => c.Details).Include(c => c.AdditionalDetails).FirstOrDefault(c => c.CustomerId == customerId);
-
-                if (customerToUpdate != null)
-                {
-
-                    customerToUpdate.CustomerName = input.CustomerName;
-                    customerToUpdate.DOB = input.DOB;
-                    customerToUpdate.Email = input.Email;
-
-                    
-                    if (customerToUpdate.Details == null)
-                    {
-                        customerToUpdate.Details = new CustomerDetail();
-                    }
-                    customerToUpdate.Details.FatherName = input.FatherName;
-                    customerToUpdate.Details.PhoneNumber = input.PhoneNumber;
-
-                    
-                    if (customerToUpdate.AdditionalDetails == null)
-                    {
-                        customerToUpdate.AdditionalDetails = new CustomerAdditionalDetail();
-                    }
-                    customerToUpdate.AdditionalDetails.City = input.City;
-                    customerToUpdate.AdditionalDetails.Country = input.Country;
-
-                    
-                    _db.SaveChanges();
-
-                    return 200;
-                }
-                else
-                {
-                    return 404;
-                }
-            }
-            catch (Exception ex)
-            {
-                return ex; // Return exception details
-            }
+            throw new NotImplementedException();
         }
+
+        public dynamic ReadCustomer()
+        {
+                try
+                {
+                //var customer = _db.Customer.Include(c => c.Details).Include(c => c.AdditionalDetails).ToList();
+                //var customer = (from c in _db.Customer
+                //                join cd in _db.CustomerDetail on c.ID equals cd.ID
+                //                join cad in _db.CustomerAdditionalDetail on c.ID equals cad.ID
+                //                select new { c.CustomerName, c.DOB, c.Email, cd.FatherName,cd.PhoneNumber,cad.Country,cad.City }).ToList();    
+                
+                return 0;
+                }
+                catch (Exception ex)
+                {
+                return ex;
+                }
+        }
+
 
     }
 }
+

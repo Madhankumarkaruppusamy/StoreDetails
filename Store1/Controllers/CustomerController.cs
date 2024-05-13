@@ -25,5 +25,12 @@ namespace Store1.Controllers
             _customer.AddCustomer(input);
             return Ok(input);
         }
+        [HttpGet]
+        [Route("ReadCustomerDetail")]
+        public dynamic ReadCustomerDetail()
+        {
+            var result=_customer.ReadCustomer();
+            return result;
+        }
     }
 }
