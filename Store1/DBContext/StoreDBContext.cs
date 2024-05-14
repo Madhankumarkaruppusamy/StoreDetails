@@ -17,10 +17,14 @@ namespace Store1.DBContext
         public virtual DbSet<CustomerDetail> CustomerDetail {  get; set; }
         public virtual DbSet<CustomerAdditionalDetail> CustomerAdditionalDetail {  get; set; }
         #endregion Table
+        #region view
+        public virtual DbSet<FetchCustomerDetail> vw_getallcustomerdetail { get; set; } 
+
+        #endregion view
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<FetchCustomerDetail>().ToView("vw_getallcustomerdetail");
+            modelBuilder.Entity<FetchCustomerDetail>().ToView("vw_getallcustomerdetail").HasNoKey();
         }
     }
 }

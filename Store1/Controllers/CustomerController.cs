@@ -27,10 +27,25 @@ namespace Store1.Controllers
         }
         [HttpGet]
         [Route("ReadCustomerDetail")]
-        public dynamic ReadCustomerDetail()
+        public dynamic ReadCustomerDetail(CustomerInput input)
         {
-            var result=_customer.ReadCustomer();
+            var result=_customer.ReadCustomer(input);
             return result;
         }
+        [HttpPut]
+        [Route("UpdateCustomerDetail")]
+        public dynamic UpdateCustomerDetail(CustomerInput input)
+        {
+            var result = _customer.UpdateCustomer(input);
+            return result;
+        }
+
+/*        [HttpDelete]
+        [Route("DeleteCustomerDetail")]
+        public dynamic DeleteCustomerDetail(long ID)
+        {
+            var result = _customer.DeleteCustomer(ID);
+            return result;
+        }*/
     }
 }

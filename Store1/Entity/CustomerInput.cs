@@ -2,12 +2,13 @@
 {
     public class CustomerInput
     {
-        public string CustomerName {  get; set; }
-        public string Email {  get; set; }
-        public long PhoneNumber {  get; set; }
-        public string City {  get; set; }
-        public string FatherName {  get; set; }
-        public DateTime DOB { get; set; }
-        public string Country {  get; set; }
+        public int ?ID { get; set; }
+        public string? CustomerName {  get; set; }
+        public string? Email {  get; set; }
+        public long? PhoneNumber {  get; set; }
+        public string? City {  get; set; }
+        public string? FatherName {  get; set; }
+        public string? DOB { get; set; }
+        public string? Country {  get; set; }
     }
 }

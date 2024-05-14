@@ -5,9 +5,8 @@ namespace Store1.IRepository
     public interface ICustomerRepository
     {
         dynamic AddCustomer(CustomerInput input);
-        IEnumerable<FetchCustomerDetail> GetAll();
-        dynamic ReadCustomer();
-        //dynamic UpdateCustomer(CustomerInput input);
-        //dynamic DeleteCustomer(CustomerInput input);
+        dynamic ReadCustomer(CustomerInput input);
+        dynamic UpdateCustomer(CustomerInput input);
+        dynamic DeleteCustomer(CustomerInput input);
     }
 }
