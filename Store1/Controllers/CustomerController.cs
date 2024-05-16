@@ -25,7 +25,7 @@ namespace Store1.Controllers
             _customer.AddCustomer(input);
             return Ok(input);
         }
-        [HttpGet]
+        [HttpPost]
         [Route("ReadCustomerDetail")]
         public dynamic ReadCustomerDetail(CustomerInput input)
         {
@@ -40,12 +40,19 @@ namespace Store1.Controllers
             return result;
         }
 
-/*        [HttpDelete]
-        [Route("DeleteCustomerDetail")]
-        public dynamic DeleteCustomerDetail(long ID)
+        /*        [HttpDelete]
+                [Route("DeleteCustomerDetail")]
+                public dynamic DeleteCustomerDetail(long ID)
+                {
+                    var result = _customer.DeleteCustomer(ID);
+                    return result;
+                }*/
+        [HttpPost]
+        [Route("AddNewCustomerDetail")]
+        public dynamic AddNewCustomerDetail(CustomerInput input)
         {
-            var result = _customer.DeleteCustomer(ID);
-            return result;
-        }*/
+            _customer.AddNewCustomer(input);
+            return Ok(input);
+        }
     }
 }

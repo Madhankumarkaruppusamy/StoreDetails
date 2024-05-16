@@ -5,7 +5,8 @@ namespace Store1.IRepository
     public interface ICustomerRepository
     {
         dynamic AddCustomer(CustomerInput input);
-        dynamic ReadCustomer(CustomerInput input);
+        dynamic AddNewCustomer(CustomerInput add);
+        dynamic ReadCustomer(CustomerInput input );
         dynamic UpdateCustomer(CustomerInput input);
         dynamic DeleteCustomer(CustomerInput input);
     }
