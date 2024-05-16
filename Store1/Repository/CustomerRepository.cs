@@ -118,48 +118,49 @@ namespace Store1.Repository
         {
             try
             {
-                using(var transaction = _db.Database.BeginTransaction())
+                using (var transaction = _db.Database.BeginTransaction())
                 {
                     try
                     {
-
                         var customer = new Customer
                         {
                             CustomerName = add.CustomerName,
                             DOB = DateTime.Parse(add.DOB),
-                            Email = add.Email,
+                            Email = add.Email
                         };
+
                         _db.Customer.Add(customer);
                         _db.SaveChanges();
-                        var customerId = _db.Customer.OrderByDescending(o => o.ID).Select(s => s.ID).FirstOrDefault();
-                        if (add.FatherName == "kumar")
-                        {
+
+                        var customerId = customer.ID; // Assuming ID is auto-generated
+
+                        
                             var customerDetail = new CustomerDetail
                             {
-                                CustomerID = customerId,
+                                CustomerID = 0,
                                 FatherName = add.FatherName
                             };
-                            _db.Customer.Add(customer);
+                            _db.CustomerDetail.Add(customerDetail);
                             _db.SaveChanges();
-                            transaction.Commit();
-                            
-                        }
-                        
-                        return customer;
+                    
+                        transaction.Commit();
+                        return 200; // Success
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         transaction.Rollback();
-                        return ex;
+                        // Log the exception for debugging
+                        return 500; // Internal Server Error
                     }
                 }
             }
             catch (Exception ex)
             {
-
-                return ex;
+                // Log the exception for debugging
+                return 500; // Internal Server Error
             }
         }
+
     }
 }
 
