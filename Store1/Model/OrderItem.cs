@@ -7,12 +7,14 @@ namespace Store1.Model
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public long ID { get; set; }
+        public int ID { get; set; }
         public string Item {  get; set; }
-        public DateTime OrderDate { get; set; }
+        public string ManufacturedDate { get; set; }
+        public string ExpiryDate { get; set; }
         public double Price { get; set; }
 
         [ForeignKey("CustomerID")]
-        public long CustomerID { get; set; }
+        public int CustomerID { get; set; }
+        public Customer Customer { get; set; }
     }
 }

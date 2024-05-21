@@ -23,24 +23,33 @@ namespace Store1.Repository
                 var customer = new Customer
                 {
                     CustomerName = input.CustomerName,
-                    DOB = DateTime.Parse(input.DOB),
-                    Email = input.Email,
+                    DOB = (input.DOB),
+                    Email = input.Email
                 };
 
                 var details = new CustomerDetail
                 {
                     FatherName = input.FatherName,
-                    PhoneNumber = (long)input.PhoneNumber,
+                    PhoneNumber = (long)input.PhoneNumber
                 };
 
                 var additionalDetail = new CustomerAdditionalDetail
                 {
                     City = input.City,
-                    Country = input.Country,
+                    Country = input.Country
+                };
+
+                var orderitem = new OrderItem
+                {
+                    Item=input.Item,
+                    ManufacturedDate=input.ManufacturedDate,
+                    ExpiryDate=input.ExpiryDate
+
                 };
 
                 customer.Details = details;
                 customer.AdditionalDetails = additionalDetail;
+                customer.OrderItems = orderitem;
 
                 _db.Customer.Add(customer);
                 _db.SaveChanges();
@@ -99,7 +108,7 @@ namespace Store1.Repository
                 var result = _db.Customer.Where(w => w.ID == input.ID).FirstOrDefault();
                 result.CustomerName = input.CustomerName;
                 result.Email = input.Email;
-                result.DOB = DateTime.Parse(input.DOB);
+                result.DOB =input.DOB;
 
 
                 _db.Customer.Update(result);
@@ -125,7 +134,7 @@ namespace Store1.Repository
                         var customer = new Customer
                         {
                             CustomerName = add.CustomerName,
-                            DOB = DateTime.Parse(add.DOB),
+                            DOB = add.DOB,
                             Email = add.Email
                         };
 
@@ -144,7 +153,7 @@ namespace Store1.Repository
                             _db.SaveChanges();
                     
                         transaction.Commit();
-                        return 200; // Success
+                        return 200; 
                     }
                     catch (Exception ex)
                     {
