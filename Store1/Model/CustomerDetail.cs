@@ -8,10 +8,10 @@ namespace Store1.Model
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
-        [ForeignKey("CustomerID")]
+        [ForeignKey("Customer")]
         public int CustomerID { get; set; }
         public Customer Customer { get; set; }
         public string FatherName {  get; set; }
-        public long PhoneNumber {  get; set; }
+        public long PhoneNumber { get; set; } 
     }
 }

@@ -12,8 +12,8 @@ using Store1.DBContext;
 namespace Store1.Migrations
 {
     [DbContext(typeof(StoreDBContext))]
-    [Migration("20240521101016_Item")]
-    partial class Item
+    [Migration("20240523095700_firstscript")]
+    partial class firstscript
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,8 +37,14 @@ namespace Store1.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("longtext");
 
+                    b.Property<DateTime?>("EndDate")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<string>("FatherName")
                         .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("FromDate")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int?>("ID")
                         .HasColumnType("int");
@@ -54,7 +60,7 @@ namespace Store1.Migrations
 
                     b.ToTable((string)null);
 
-                    b.ToView("vw_getallcustomerdetail", (string)null);
+                    b.ToView("sp_customerdetail", (string)null);
                 });
 
             modelBuilder.Entity("Store1.Model.Customer", b =>
@@ -69,9 +75,8 @@ namespace Store1.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("DOB")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                    b.Property<DateTime>("DOB")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -146,15 +151,13 @@ namespace Store1.Migrations
                     b.Property<int>("CustomerID")
                         .HasColumnType("int");
 
-                    b.Property<string>("ExpiryDate")
-                        .IsRequired()
-                        .HasColumnType("longtext");
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("FromDate")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Item")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<string>("ManufacturedDate")
                         .IsRequired()
                         .HasColumnType("longtext");
 

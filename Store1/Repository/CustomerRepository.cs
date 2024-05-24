@@ -23,7 +23,7 @@ namespace Store1.Repository
                 var customer = new Customer
                 {
                     CustomerName = input.CustomerName,
-                    DOB = (input.DOB),
+                    DOB = Convert.ToDateTime(input.DOB),
                     Email = input.Email
                 };
 
@@ -42,8 +42,7 @@ namespace Store1.Repository
                 var orderitem = new OrderItem
                 {
                     Item=input.Item,
-                    ManufacturedDate=input.ManufacturedDate,
-                    ExpiryDate=input.ExpiryDate
+                    Date= Convert.ToDateTime(input.Date)
 
                 };
 
@@ -74,10 +73,11 @@ namespace Store1.Repository
                 //var customer = _db.Customer.Include(c => c.Details).Include(c => c.AdditionalDetails).ToList();   //var customer = (from c in _db.Customer  join cd in _db.CustomerDetail on c.ID equals cd.ID   join cad in _db.CustomerAdditionalDetail on c.ID equals cad.ID     select new { c.CustomerName, c.DOB, c.Email, cd.FatherName,cd.PhoneNumber,cad.Country,cad.City }).ToList();    ////   var customer=_db.vw_getallcustomerdetail.ToList();////customer = customer.Where(w => w.CustomerName == "hari").ToList();
 
 
-                IQueryable<FetchCustomerDetail> customer = _db.vw_getallcustomerdetail;
+                /*IQueryable<FetchCustomerDetail> customer = _db.vw_getallcustomerdetail;
                 if (!string.IsNullOrWhiteSpace(input.CustomerName))
                     customer = customer.Where(w => w.CustomerName.Equals(input.CustomerName, StringComparison.OrdinalIgnoreCase));
-
+*/
+                var customer = _db.sp_customerdetail.FromSqlRaw($"call sp_customerdetail('{input.CustomerName}','{input.DOB}',{input.PhoneNumber??0})").ToList();
                 var pagesizecalculate = ((input.PageNumber - 1) * input.PageSize);
                 var paginatedResult = customer.Skip((input.PageNumber - 1) * input.PageSize)
                                      .Take(input.PageSize)
@@ -108,7 +108,7 @@ namespace Store1.Repository
                 var result = _db.Customer.Where(w => w.ID == input.ID).FirstOrDefault();
                 result.CustomerName = input.CustomerName;
                 result.Email = input.Email;
-                result.DOB =input.DOB;
+                result.DOB =Convert.ToDateTime(input.DOB);
 
 
                 _db.Customer.Update(result);
@@ -134,7 +134,7 @@ namespace Store1.Repository
                         var customer = new Customer
                         {
                             CustomerName = add.CustomerName,
-                            DOB = add.DOB,
+                            DOB = Convert.ToDateTime(add.DOB),
                             Email = add.Email
                         };
 
@@ -168,6 +168,7 @@ namespace Store1.Repository
                 // Log the exception for debugging
                 return 500; // Internal Server Error
             }
+
         }
 
     }

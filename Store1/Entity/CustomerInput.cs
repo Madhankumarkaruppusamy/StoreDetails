@@ -11,8 +11,7 @@
         public string? DOB { get; set; }
         public string? Country { get; set; }
         public string? Item { get; set; }
-        public string? ManufacturedDate { get; set; }
-        public string? ExpiryDate { get; set; }
+        public string? Date { get; set; }
 
 
         public int PageNumber { get; set; }

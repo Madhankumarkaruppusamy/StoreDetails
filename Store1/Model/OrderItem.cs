@@ -9,11 +9,10 @@ namespace Store1.Model
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
         public string Item {  get; set; }
-        public string ManufacturedDate { get; set; }
-        public string ExpiryDate { get; set; }
+        public DateTime Date { get; set; }
         public double Price { get; set; }
 
-        [ForeignKey("CustomerID")]
+        [ForeignKey("Customer")]
         public int CustomerID { get; set; }
         public Customer Customer { get; set; }
     }

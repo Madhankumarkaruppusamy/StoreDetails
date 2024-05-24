@@ -9,7 +9,9 @@
         public string? city { get; set; }
         public string? country { get; set; }
         public string? FatherName { get; set; }
-        public DateTime? DOB { get; set; }  
+        public DateTime? DOB { get; set; }
+        public DateTime? FromDate { get; set; }
+        public DateTime? EndDate { get; set; }
 
     }
 }
