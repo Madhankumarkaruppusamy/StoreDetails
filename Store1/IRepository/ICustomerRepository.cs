@@ -8,6 +8,6 @@ namespace Store1.IRepository
         dynamic AddNewCustomer(CustomerInput add);
         dynamic ReadCustomer(CustomerInput input );
         dynamic UpdateCustomer(CustomerInput input);
-        dynamic DeleteCustomer(CustomerInput input);
+        dynamic DeleteCustomer(int ID);
     }
 }

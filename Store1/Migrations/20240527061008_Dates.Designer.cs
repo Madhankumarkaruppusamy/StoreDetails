@@ -12,8 +12,8 @@ using Store1.DBContext;
 namespace Store1.Migrations
 {
     [DbContext(typeof(StoreDBContext))]
-    [Migration("20240523095700_firstscript")]
-    partial class firstscript
+    [Migration("20240527061008_Dates")]
+    partial class Dates
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,23 +28,19 @@ namespace Store1.Migrations
             modelBuilder.Entity("Store1.Entity.FetchCustomerDetail", b =>
                 {
                     b.Property<string>("CustomerName")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<DateTime?>("DOB")
                         .HasColumnType("datetime(6)");
 
+                    b.Property<DateTime?>("Date")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<string>("Email")
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime?>("EndDate")
-                        .HasColumnType("datetime(6)");
-
                     b.Property<string>("FatherName")
                         .HasColumnType("longtext");
-
-                    b.Property<DateTime?>("FromDate")
-                        .HasColumnType("datetime(6)");
 
                     b.Property<int?>("ID")
                         .HasColumnType("int");
@@ -151,10 +147,7 @@ namespace Store1.Migrations
                     b.Property<int>("CustomerID")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<DateTime>("FromDate")
+                    b.Property<DateTime>("Dates")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Item")

@@ -9,7 +9,7 @@ namespace Store1.Model
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
         public string Item {  get; set; }
-        public DateTime Date { get; set; }
+        public DateTime Dates { get; set; }
         public double Price { get; set; }
 
         [ForeignKey("Customer")]

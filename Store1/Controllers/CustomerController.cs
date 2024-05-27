@@ -10,7 +10,6 @@ namespace Store1.Controllers
     [ApiController]
     public class CustomerController : ControllerBase
     {
-        private readonly StoreDBContext _db;
         private readonly ICustomerRepository _customer;
         
         public CustomerController(ICustomerRepository customer)
@@ -40,13 +39,13 @@ namespace Store1.Controllers
             return result;
         }
 
-        /*        [HttpDelete]
-                [Route("DeleteCustomerDetail")]
-                public dynamic DeleteCustomerDetail(long ID)
-                {
-                    var result = _customer.DeleteCustomer(ID);
-                    return result;
-                }*/
+        [HttpDelete]
+        [Route("DeleteCustomerDetail")]
+        public dynamic DeleteCustomerDetail(int ID)
+        {
+            var result = _customer.DeleteCustomer(ID);
+            return result;
+        }
         [HttpPost]
         [Route("AddNewCustomerDetail")]
         public dynamic AddNewCustomerDetail(CustomerInput input)
@@ -54,5 +53,7 @@ namespace Store1.Controllers
             _customer.AddNewCustomer(input);
             return Ok(input);
         }
+
+        
     }
 }

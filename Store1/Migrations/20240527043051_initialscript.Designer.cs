@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Store1.DBContext;
 
@@ -11,9 +12,11 @@ using Store1.DBContext;
 namespace Store1.Migrations
 {
     [DbContext(typeof(StoreDBContext))]
-    partial class StoreDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240527043051_initialscript")]
+    partial class initialscript
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,14 +33,17 @@ namespace Store1.Migrations
                     b.Property<DateTime?>("DOB")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<DateTime?>("Date")
-                        .HasColumnType("datetime(6)");
-
                     b.Property<string>("Email")
                         .HasColumnType("longtext");
 
+                    b.Property<DateTime?>("EndDate")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<string>("FatherName")
                         .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("FromDate")
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int?>("ID")
                         .HasColumnType("int");
@@ -144,7 +150,7 @@ namespace Store1.Migrations
                     b.Property<int>("CustomerID")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("Dates")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Item")

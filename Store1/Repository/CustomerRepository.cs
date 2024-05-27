@@ -5,6 +5,8 @@ using Store1.Entity;
 using Store1.IRepository;
 using Store1.Model;
 using System.Transactions;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Store1.Repository
 {
@@ -41,11 +43,11 @@ namespace Store1.Repository
 
                 var orderitem = new OrderItem
                 {
-                    Item=input.Item,
-                    Date= Convert.ToDateTime(input.Date)
-
+                    Item = input.Item
+                    
+            
                 };
-
+                
                 customer.Details = details;
                 customer.AdditionalDetails = additionalDetail;
                 customer.OrderItems = orderitem;
@@ -60,7 +62,7 @@ namespace Store1.Repository
             }
         }
 
-        public dynamic DeleteCustomer(CustomerInput input)
+        public dynamic DeleteCustomer(int ID)
         {
             throw new NotImplementedException();
         }
@@ -70,21 +72,51 @@ namespace Store1.Repository
             try
             {
                 //input.PageNumber++;
-                //var customer = _db.Customer.Include(c => c.Details).Include(c => c.AdditionalDetails).ToList();   //var customer = (from c in _db.Customer  join cd in _db.CustomerDetail on c.ID equals cd.ID   join cad in _db.CustomerAdditionalDetail on c.ID equals cad.ID     select new { c.CustomerName, c.DOB, c.Email, cd.FatherName,cd.PhoneNumber,cad.Country,cad.City }).ToList();    ////   var customer=_db.vw_getallcustomerdetail.ToList();////customer = customer.Where(w => w.CustomerName == "hari").ToList();
+                //var customer = _db.Customer.Include(c => c.Details).Include(c => c.AdditionalDetails).ToList();
+                //var customer = (from c in _db.Customer  join cd in _db.CustomerDetail on c.ID equals cd.ID   join cad in _db.CustomerAdditionalDetail on c.ID equals cad.ID     select new { c.CustomerName, c.DOB, c.Email, cd.FatherName,cd.PhoneNumber,cad.Country,cad.City }).ToList(); 
+                //var customer=_db.vw_getallcustomerdetail.ToList();
+                //customer = customer.Where(w => w.CustomerName == "hari").ToList();
 
 
                 /*IQueryable<FetchCustomerDetail> customer = _db.vw_getallcustomerdetail;
                 if (!string.IsNullOrWhiteSpace(input.CustomerName))
-                    customer = customer.Where(w => w.CustomerName.Equals(input.CustomerName, StringComparison.OrdinalIgnoreCase));
-*/
-                var customer = _db.sp_customerdetail.FromSqlRaw($"call sp_customerdetail('{input.CustomerName}','{input.DOB}',{input.PhoneNumber??0})").ToList();
-                var pagesizecalculate = ((input.PageNumber - 1) * input.PageSize);
+                    customer = customer.Where(w => w.CustomerName.Equals(input.CustomerName, StringComparison.OrdinalIgnoreCase));*/
+
+
+
+                DateTime? FromDate = null;
+                DateTime? ToDate = null;
+                if (!string.IsNullOrEmpty(input.Dates))
+                {
+
+                    string[] dateParts = input.Dates.Split('|');
+
+                    if (dateParts.Length == 2)
+                    {
+
+                        if (DateTime.TryParse(dateParts[0], out DateTime fromDate))
+                        {
+                            FromDate = fromDate;
+                        }
+
+                        if (DateTime.TryParse(dateParts[1], out DateTime toDate))
+                        {
+                            ToDate = toDate;
+                        }
+                    }
+                }
+
+                var customer = _db.sp_customerdetail
+                               .FromSqlRaw($"call sp_customerdetail('{input.CustomerName}','{input.DOB}',{input.PhoneNumber ?? 0},'{FromDate}','{ToDate}')").ToList();
+                               
+
+                var pagesizecalculate = (input.PageNumber - 1) * input.PageSize;
                 var paginatedResult = customer.Skip((input.PageNumber - 1) * input.PageSize)
                                      .Take(input.PageSize)
                                      .ToList();
                 var totalcount = customer.Count();
 
-                return new { Data = paginatedResult, TotalCount = totalcount };
+                return customer;
 
             }
             catch (Exception ex)
@@ -143,11 +175,11 @@ namespace Store1.Repository
 
                         var customerId = customer.ID; // Assuming ID is auto-generated
 
-                        
-                            var customerDetail = new CustomerDetail
-                            {
-                                CustomerID = 0,
-                                FatherName = add.FatherName
+
+                        var customerDetail = new CustomerDetail
+                        {
+                            CustomerID = 0,
+                            FatherName = add.FatherName
                             };
                             _db.CustomerDetail.Add(customerDetail);
                             _db.SaveChanges();
@@ -158,15 +190,15 @@ namespace Store1.Repository
                     catch (Exception ex)
                     {
                         transaction.Rollback();
-                        // Log the exception for debugging
-                        return 500; // Internal Server Error
+                        
+                        return ex; 
                     }
                 }
             }
             catch (Exception ex)
             {
-                // Log the exception for debugging
-                return 500; // Internal Server Error
+                
+                return ex; 
             }
 
         }
